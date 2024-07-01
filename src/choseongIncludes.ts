@@ -1,5 +1,5 @@
 import { disassembleHangulToGroups } from './disassemble';
-import { canBeChosung, getChosung } from './utils';
+import { canBeChoseong, getChoseong } from './utils';
 
 /**
  * @description 문자열이 한글초성으로만 주어진 경우
@@ -11,22 +11,19 @@ function isOnlyChoseong(str: string) {
   }
 
   return groups.every(disassembled => {
-    return disassembled.length === 1 && canBeChosung(disassembled[0]);
+    return disassembled.length === 1 && canBeChoseong(disassembled[0]);
   });
 }
 
-/**
- * @deprecated choseongIncludes 사용을 권장합니다.
- */
-export function chosungIncludes(x: string, y: string) {
+export function choseongIncludes(x: string, y: string) {
   const trimmedY = y.replace(/\s+/g, '');
 
   if (!isOnlyChoseong(trimmedY)) {
     return false;
   }
 
-  const chosungX = getChosung(x).replace(/\s+/g, '');
-  const chosungY = trimmedY;
+  const choseongX = getChoseong(x).replace(/\s+/g, '');
+  const choseongY = trimmedY;
 
-  return chosungX.includes(chosungY);
+  return choseongX.includes(choseongY);
 }
